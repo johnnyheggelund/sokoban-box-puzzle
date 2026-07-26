@@ -1,1 +1,1 @@
-[![Play Game!](screenshot.png)](https://din-lenke.com)
+[![Play Game!](screenshot.png)](https://johnnyheggelund.github.io/sokoban-box-puzzle/)
