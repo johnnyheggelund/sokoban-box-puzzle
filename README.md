@@ -1,1 +1,1 @@
-&copy; Johnny Heggelund 2026
+[![Play Game!](screenshot.png)](https://din-lenke.com)
