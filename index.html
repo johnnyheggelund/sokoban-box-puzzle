@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
@@ -7,6 +8,7 @@
 <meta name="description" content="Sokoban Logic Puzzle Game with 2549 Verified Levels. Free to play WebGame. No ads.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%2250%22 y=%2275%22 font-size=%2280%22 text-anchor=%22middle%22>%F0%9F%93%A6</text></svg>">
 <style>
+
 :root {
 --bg-color: #121212;
 --board-bg-color: #1e1e1e;
@@ -20,52 +22,54 @@
 --box-on-goal-color: #388e3c;
 --tile-size: 30px;
 }
+
 html, body {
-    overflow: hidden;
-    touch-action: none;
-    -webkit-user-select: none;
-    user-select: none;
-    width: 100%;
-    /* ENDRING: Bruk 100dvh i stedet for 100% for å støtte mobilskjermer bedre */
-    height: 100dvh; 
+overflow: hidden;
+touch-action: none;
+-webkit-user-select: none;
+user-select: none;
+width: 100%;
+height: 100dvh;
 }
+
 body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    font-family: var(--font-family);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
-    font-size: 14px;
-    padding: 0; /* ENDRET FRA 10px TIL 0 */
-    box-sizing: border-box;
+background-color: var(--bg-color);
+color: var(--text-color);
+font-family: var(--font-family);
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+margin: 0;
+font-size: 14px;
+padding: 0;
+box-sizing: border-box;
 }
+
 #game-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px; 
-    border: none;
-    background-color: var(--board-bg-color);
-    box-shadow: none; 
-    border-radius: 0; 
-    width: 100%;
-    /* ENDRING: Sørg for at den fyller hele høyden */
-    height: 100%; 
-    max-width: 100%;
-    box-sizing: border-box;
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 10px;
+border: none;
+background-color: var(--board-bg-color);
+box-shadow: none;
+border-radius: 0;
+width: 100%;
+height: 100%;
+max-width: 100%;
+box-sizing: border-box;
 }
+
 #game-board {
-    display: grid;
-    line-height: 1;
-    /* ENDRING: Bruk margin auto for å sentrere brettet perfekt i midten av den ledige plassen! */
-    margin: auto; 
-    border-spacing: 0;
-    background-color: var(--board-bg-color);
-    -webkit-tap-highlight-color: transparent; 
+display: grid;
+line-height: 1;
+margin: auto;
+border-spacing: 0;
+background-color: var(--board-bg-color);
+-webkit-tap-highlight-color: transparent;
 }
+
 .tile {
 width: var(--tile-size);
 height: var(--tile-size);
@@ -78,11 +82,13 @@ box-sizing: border-box;
 transition: all 0.1s ease-out;
 position: relative;
 }
+
 .wall {
 background-color: var(--wall-color);
 border-radius: 4px;
 border: 1px solid rgba(0, 0, 0, 0.2);
 }
+
 .goal::before {
 content: '';
 position: absolute;
@@ -93,54 +99,62 @@ border-radius: 4px;
 box-sizing: border-box;
 opacity: 0.6;
 }
+
 .player, .player-on-goal {
 color: var(--player-color);
 z-index: 3;
 }
+
 .player::after, .player-on-goal::after {
 content: '🧍';
 font-size: calc(var(--tile-size) * 0.8);
 position: absolute;
 }
+
 .box {
 color: var(--box-color);
 z-index: 2;
 }
+
 .box::after {
 content: '📦';
 font-size: calc(var(--tile-size) * 0.7);
 position: absolute;
 }
+
 .box-on-goal {
 color: var(--box-on-goal-color);
 }
+
 .box-on-goal::after {
 content: '✅';
 font-size: calc(var(--tile-size) * 0.7);
 position: absolute;
 }
+
 .tile span {
 display: none;
 }
+
 #status-bar {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    /* ENDRING: Fjernet margin-bottom, Flexbox håndterer nå avstanden */
-    padding: 5px 0;
-    font-size: 0.95em;
-    font-weight: bold;
+width: 100%;
+display: flex;
+justify-content: space-between;
+padding: 5px 0;
+font-size: 0.95em;
+font-weight: bold;
 }
+
 #mobile-controls {
-    border-top: 2px solid var(--border-color);
-    padding-top: 15px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    gap: 6px;
-    /* ENDRING: Sørger for at den presses helt ned til bunnen */
-    margin-top: auto; 
+border-top: 2px solid var(--border-color);
+padding-top: 15px;
+width: 100%;
+display: flex;
+justify-content: space-between;
+gap: 6px;
+margin-top: auto;
 }
+
 .btn {
 background-color: #2a2a2a;
 color: var(--text-color);
@@ -159,18 +173,22 @@ flex: 1;
 -webkit-tap-highlight-color: transparent;
 touch-action: manipulation;
 }
+
 .btn:active {
 background-color: #3a3a3a;
 transform: scale(0.95);
 }
+
 .btn-icon {
 font-size: 1.1em;
 }
+
 #btn-help {
 flex: 0 0 45px;
 max-width: 45px;
 background-color: #222;
 }
+
 #win-message {
 display: none;
 font-size: 1.8em;
@@ -179,7 +197,6 @@ color: var(--goal-color);
 font-weight: bold;
 }
 
-/* Overlays */
 .overlay {
 display: none;
 position: fixed;
@@ -192,6 +209,7 @@ justify-content: center;
 align-items: center;
 z-index: 100;
 }
+
 .modal {
 position: relative;
 background-color: var(--board-bg-color);
@@ -205,6 +223,7 @@ flex-direction: column;
 border-radius: 8px;
 box-sizing: border-box;
 }
+
 .close-btn {
 position: absolute;
 top: 8px;
@@ -219,10 +238,12 @@ padding: 5px 10px;
 -webkit-tap-highlight-color: transparent;
 touch-action: manipulation;
 }
+
 .close-btn:active {
 color: var(--player-color);
 transform: scale(0.95);
 }
+
 .modal-title {
 text-align: center;
 font-size: 1.3em;
@@ -230,6 +251,7 @@ margin-bottom: 15px;
 font-weight: bold;
 letter-spacing: 1px;
 }
+
 #level-list {
 list-style: none;
 padding: 0;
@@ -237,6 +259,7 @@ margin: 0;
 overflow-y: auto;
 flex-grow: 1;
 }
+
 #level-list li {
 padding: 12px 15px;
 cursor: pointer;
@@ -247,31 +270,36 @@ text-align: center;
 -webkit-tap-highlight-color: transparent;
 font-weight: bold;
 }
+
 #level-list li:hover {
 background-color: #333;
 }
+
 #level-list li.selected {
 background-color: var(--player-color);
 color: var(--bg-color);
 }
 
-/* Hjelp-modal */
 #help-content {
 font-size: 0.95em;
 line-height: 1.5;
 overflow-y: auto;
 }
+
 #help-content p {
 margin: 0 0 12px 0;
 display: flex;
 align-items: flex-start;
 gap: 10px;
 }
+
 #help-content p:last-child {
 margin-bottom: 0;
 }
+
 </style>
 </head>
+
 <body>
 <div id="game-container">
 <div id="status-bar">
@@ -36430,6 +36458,7 @@ const LEVELS = [
 const Tiles = { Wall: '#', Floor: ' ', Player: '@', Box: '$', Goal: '.', PlayerOnGoal: '+', BoxOnGoal: '*' };
 const STORAGE_KEY = 'sokoban_retro_level';
 class SokobanGame {
+
 constructor() {
 this.currentLevelIndex = 0;
 this.board = [];
@@ -36440,6 +36469,7 @@ this.pushes = 0;
 this.history = [];
 this.maxCols = 0;
 }
+
 loadLevel(levelIndex) {
 if (levelIndex >= LEVELS.length) return false;
 this.currentLevelIndex = levelIndex;
@@ -36472,17 +36502,21 @@ this.maxCols = Math.max(this.maxCols, row.length);
 this.setTileAt(this.playerPos.x, this.playerPos.y, Tiles.Player);
 return true;
 }
+
 getTileAt(x, y) {
 return this.board[y]?.[x] || null;
 }
+
 setTileAt(x, y, tile) {
 if (this.board[y]?.[x] !== undefined) {
 this.board[y][x] = tile;
 }
 }
+
 isGoalAt(x, y) {
 return this.goals.some(g => g.x === x && g.y === y);
 }
+
 movePlayer(dx, dy) {
 const { x, y } = this.playerPos;
 const newPos = { x: x + dx, y: y + dy };
@@ -36509,6 +36543,7 @@ if (pushedBox) this.pushes++;
 this.history.push({ changes, pushed: pushedBox });
 return changes;
 }
+
 undo() {
 if (this.history.length === 0) return null;
 const lastMove = this.history.pop();
@@ -36525,10 +36560,12 @@ this.moves--;
 if (lastMove.pushed) this.pushes--;
 return reversedChanges;
 }
+
 checkWin() {
 return this.goals.every(g => this.getTileAt(g.x, g.y) === Tiles.Box);
 }
 }
+
 class UIManager {
 constructor(game) {
 this.game = game;
@@ -36551,6 +36588,7 @@ this.VIEWPORT_SCALE = 0.65;
 this.MIN_TILE_SIZE = 24;
 this.MAX_TILE_SIZE = 50;
 }
+
 getTileClassName(char, x, y) {
 const isGoal = this.game.isGoalAt(x, y);
 if (char === Tiles.Player) return isGoal ? 'player-on-goal' : 'player';
@@ -36559,9 +36597,11 @@ if (char === Tiles.Wall) return 'wall';
 if (isGoal) return 'goal';
 return 'floor';
 }
+
 getDisplayCharacter(char, x, y) {
 return ' ';
 }
+
 renderFullBoard() {
 this.elements.board.innerHTML = '';
 this.tileElements = [];
@@ -36587,6 +36627,7 @@ this.tileElements.push(tileRow);
 this.adjustFontSize();
 this.updateStatus();
 }
+
 updateTiles(changedTiles) {
 if (!changedTiles) return;
 changedTiles.forEach(change => {
@@ -36602,15 +36643,18 @@ tileEl.querySelector('span').textContent = char;
 });
 this.updateStatus();
 }
+
 updateStatus() {
 this.elements.level.textContent = `LEVEL: ${this.game.currentLevelIndex + 1}/${LEVELS.length}`;
 this.elements.moves.textContent = `MOVES: ${this.game.moves}`;
 this.elements.pushes.textContent = `PUSHES: ${this.game.pushes}`;
 }
+
 showWinMessage() {
 this.elements.gameContainer.style.display = 'none';
 this.elements.winMessage.style.display = 'block';
 }
+
 toggleLevelChooser() {
 this.isChooserOpen = !this.isChooserOpen;
 this.elements.chooserOverlay.style.display = this.isChooserOpen ? 'flex' : 'none';
@@ -36620,6 +36664,7 @@ this.selectedInChooser = this.game.currentLevelIndex;
 this.populateChooser();
 }
 }
+
 toggleHelp() {
 this.isHelpOpen = !this.isHelpOpen;
 this.elements.helpOverlay.style.display = this.isHelpOpen ? 'flex' : 'none';
@@ -36627,11 +36672,12 @@ if (this.isHelpOpen && this.isChooserOpen) {
 this.toggleLevelChooser();
 }
 }
+
 populateChooser() {
 this.elements.levelList.innerHTML = '';
 LEVELS.forEach((_, index) => {
 const li = document.createElement('li');
-li.textContent = `Nivå ${index + 1}`;
+li.textContent = `Level ${index + 1}`;
 li.dataset.index = index;
 if (index === this.selectedInChooser) li.classList.add('selected');
 li.addEventListener('click', () => {
@@ -36642,6 +36688,7 @@ this.elements.levelList.appendChild(li);
 });
 this.elements.levelList.querySelector('.selected')?.scrollIntoView({ block: 'center' });
 }
+
 navigateChooser(direction) {
 const current = this.elements.levelList.querySelector(`[data-index='${this.selectedInChooser}']`);
 if (current) current.classList.remove('selected');
@@ -36652,45 +36699,26 @@ newSelected.classList.add('selected');
 newSelected.scrollIntoView({ block: 'center', behavior: 'smooth' });
 }
 }
+
 adjustFontSize() {
-    if (this.game.board.length === 0 || this.game.maxCols === 0) return;
-
-    const numRows = this.game.board.length;
-    const numCols = this.game.maxCols;
-
-    // Finn høyden på toppmeny og bunnmeny slik at vi vet nøyaktig hvor mye plass brettet har
-    const statusBar = document.getElementById('status-bar');
-    const controls = document.getElementById('mobile-controls');
-    
-    // Fallbacks i tilfelle elementene ikke har rendret enda
-    const statusBarHeight = statusBar.offsetHeight || 30;
-    const controlsHeight = controls.offsetHeight || 60;
-
-    // Vi har 10px padding på alle sider av game-container (20px totalt)
-    const padding = 20; 
-
-    // Beregn den faktiske tilgjengelige plassen på skjermen
-    const availableWidth = window.innerWidth - padding;
-    
-    // Tilgjengelig høyde er skjermhøyde minus toppmeny, bunnmeny og padding
-    // Vi legger til 20px ekstra i regnestykket for at det skal puste litt
-    const availableHeight = window.innerHeight - statusBarHeight - controlsHeight - padding - 20;
-
-    // Hvor store kan rutene være for å passe i henholdsvis høyde og bredde?
-    const sizeFromH = availableHeight / numRows;
-    const sizeFromW = availableWidth / numCols;
-
-    // Vi MÅ velge den minste av dem, ellers vil brettet kuttes enten horisontalt eller vertikalt
-    let newTileSize = Math.floor(Math.min(sizeFromH, sizeFromW));
-
-    // Valgfritt: Vi setter en makshøyde slik at det ikke blir absurd stort på 4K-skjermer
-    // men vi har INGEN minimumshøyde. Dette lar det krympe så mye som trengs på iPhone.
-    newTileSize = Math.min(newTileSize, 70); 
-
-    // Oppdater CSS-variabelen som tegner opp rutenettet
-    document.documentElement.style.setProperty('--tile-size', `${newTileSize}px`);
+if (this.game.board.length === 0 || this.game.maxCols === 0) return;
+const numRows = this.game.board.length;
+const numCols = this.game.maxCols;
+const statusBar = document.getElementById('status-bar');
+const controls = document.getElementById('mobile-controls');
+const statusBarHeight = statusBar.offsetHeight || 30;
+const controlsHeight = controls.offsetHeight || 60;
+const padding = 20;
+const availableWidth = window.innerWidth - padding;
+const availableHeight = window.innerHeight - statusBarHeight - controlsHeight - padding - 20;
+const sizeFromH = availableHeight / numRows;
+const sizeFromW = availableWidth / numCols;
+let newTileSize = Math.floor(Math.min(sizeFromH, sizeFromW));
+newTileSize = Math.min(newTileSize, 70);
+document.documentElement.style.setProperty('--tile-size', `${newTileSize}px`);
 }
 }
+
 class App {
 constructor() {
 this.game = new SokobanGame();
@@ -36699,6 +36727,7 @@ this.touchStart = { x: 0, y: 0 };
 this.minSwipeDistance = 30;
 this.init();
 }
+
 init() {
 document.addEventListener('keydown', this.handleKeyDown.bind(this));
 window.addEventListener('resize', this.handleResize.bind(this));
@@ -36714,9 +36743,11 @@ document.getElementById('help-close').addEventListener('click', () => this.ui.to
 const savedLevel = parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10);
 this.startLevel(savedLevel);
 }
+
 handleResize() {
 this.ui.adjustFontSize();
 }
+
 startLevel(levelIndex) {
 const levelLoaded = this.game.loadLevel(levelIndex);
 if (levelLoaded) {
@@ -36725,24 +36756,29 @@ this.ui.renderFullBoard();
 this.ui.showWinMessage();
 }
 }
+
 selectLevel() {
 this.startLevel(this.ui.selectedInChooser);
 localStorage.setItem(STORAGE_KEY, this.ui.selectedInChooser);
 this.ui.toggleLevelChooser();
 }
+
 handleTouchStart(e) {
 if (e.target.closest('#mobile-controls') || e.target.closest('.modal')) {
 return;
 }
+
 e.preventDefault();
 this.touchStart.x = e.touches[0].clientX;
 this.touchStart.y = e.touches[0].clientY;
 }
+
 handleTouchMove(e) {
 if (!e.target.closest('.modal')) {
 e.preventDefault();
 }
 }
+
 handleTouchEnd(e) {
 if (this.ui.isChooserOpen || this.ui.isHelpOpen) return;
 if (e.target.closest('#mobile-controls')) return;
@@ -36760,6 +36796,7 @@ this.executeMove(0, dy > 0 ? 1 : -1);
 }
 }
 }
+
 executeMove(dx, dy) {
 const changes = this.game.movePlayer(dx, dy);
 if (changes) {
@@ -36771,10 +36808,12 @@ setTimeout(() => this.startLevel(nextLevel), 500);
 }
 }
 }
+
 triggerUndo() {
 const undoneChanges = this.game.undo();
 this.ui.updateTiles(undoneChanges);
 }
+
 handleKeyDown(e) {
 if (this.ui.isChooserOpen) {
 e.preventDefault();
@@ -36812,6 +36851,7 @@ this.executeMove(dx, dy);
 }
 const app = new App();
 </script>
+
 <script>
 window.addEventListener('keydown', (e) => {
 if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(e.key)) {
@@ -36822,5 +36862,6 @@ document.addEventListener('gesturestart', function (e) {
 e.preventDefault();
 });
 </script>
+
 </body>
 </html>
