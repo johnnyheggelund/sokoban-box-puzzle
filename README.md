@@ -1,4 +1,4 @@
-Sokoban Box Puzzle Game.
+### Sokoban Box Puzzle Game.
 
 ### [Start Game ➜](https://johnnyheggelund.github.io/sokoban-box-puzzle/sokoban.html)
 
