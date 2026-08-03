@@ -1,4 +1,4 @@
-### Sokoban Box Puzzle Game.
+### Sokoban Box Puzzle web game with 2,549 verified levels.
 
 ### [Start Game ➜](https://johnnyheggelund.github.io/sokoban-box-puzzle/sokoban.html)
 
